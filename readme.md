@@ -92,6 +92,31 @@ Finally, map the sentiments from the code as an object and write a function to p
 ###### 5 Making the legend
 
 The legend is the second part of this project, as it's important to understand the pie chart. This function starts with an empty object aswell, called "leg". The legend consists of a table, inside a tbody, 3 td elements and they each have 3 tr's.
+For the second row, I used this function to put the data in the text.  In the second function you can see how I put the percentages in the text.
+```javascript
+        tr.append("td").attr("class",'legendsentiment')
+            .text(function(d) { 
+                return d3.format("1")(d.sentiment);
+            });
+
+        tr.append("td").attr("class",'legendPerc')
+            .text(function(d) { 
+                return getLegend(d,lD);
+            });
+```
+The following code shows how the tbody elements are redirected to the right year and sentiments. The parameter refers to a variable later explained, which carries the object with the selected year and sentiment. This data is put in the legend right here. The number of sentiments is updated in the second td, the percentages are stored in the third td.
+```javascript
+        leg.update = function(yearSentiment){
+            var l = legend.select("tbody").selectAll("tr").data(yearSentiment);
+
+// update the number of sentiments in the legend 
+            l.select(".legendsentiment").text(function(d){ return d3.format(",")(d.sentiment);});
+
+// update the percentage of sentiments
+            l.select(".legendPerc").text(function(d){ return getLegend(d,yearSentiment);});        
+        }
+```
+
 This function shows how the percentages of the sentiments are calculated. These calculations are put in the 3rd row of the legend, after the integers of the number of mentions. A parameter is used to later return the value to construct a new map. The format makes sure the numbers are in percentages and rounded. After that, the selected data is devided by d3.sum. This makes sure the value is extracted and summarized. Together, this and the value (mapped) can make up a function that returns the correct value of sentiments. This is used for the default data and the selected data after .mouseover.
 ```javascript
         function getLegend(d,dValue){ 
