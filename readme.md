@@ -11,6 +11,7 @@ This readme will tell you about the steps I've taken to the final result, the da
 My first step, after figuring out the graphs and interaction I wanted to make, I started to search for similar graphs. The ones that I used mostly were [Martin Chorley's Bar chart](https://bl.ocks.org/martinjc/8a2a545d5c48ef1ff65b747554332e3d), [Mike Bostock's Arctween](http://bl.ocks.org/mbostock/5100636) and [this interactive bar chart](http://bl.ocks.org/jonahwilliams/2f16643b999ada7b1909)
 
 ###### 2. Finding the dataset
+![title of my project](title.png)
 To use my own data (from [FiveThirtyEight](https://github.com/fivethirtyeight/data/blob/master/hip-hop-candidate-lyrics/genius_hip_hop_lyrics.csv)) it was a huge struggle. I started with a Pie chart, and my plan was to add up the sentiments used in the data per year. After searching and asking around, I found [this link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce). Instead of already altering and cleaning the data, I used dummy data to play with the pie chart first. I wanted to know if my plan would work, so that was the first priority. In this step, the main goal was to find some cool data, and I did
 
 
@@ -90,7 +91,15 @@ Finally, map the sentiments from the code as an object and write a function to p
 ```
 ###### 5 Making the legend
 
-The legend is the second part of this project, as it's important to understand the pie chart. This function starts with an empty object aswell, called "leg". The legend consists of a table, inside a tbody, 3 td elements and they each have 3 tr's. 
+The legend is the second part of this project, as it's important to understand the pie chart. This function starts with an empty object aswell, called "leg". The legend consists of a table, inside a tbody, 3 td elements and they each have 3 tr's.
+This function shows how the percentages of the sentiments are calculated. These calculations are put in the 3rd row of the legend, after the integers of the number of mentions. A parameter is used to later return the value to construct a new map. The format makes sure the numbers are in percentages and rounded. After that, the selected data is devided by d3.sum. This makes sure the value is extracted and summarized. Together, this and the value (mapped) can make up a function that returns the correct value of sentiments. This is used for the default data and the selected data after .mouseover.
+```javascript
+        function getLegend(d,dValue){ 
+            return d3.format(".0%")(d.sentiment/d3.sum(dValue.map(function(v) { 
+                return v.sentiment; 
+            })));
+        }
+```
 
 
 ###### 6
@@ -118,7 +127,8 @@ The parameter that the function in pC.update refers to, leads to a variable spec
 
 ### The dataset
 
-The dataset shows all presidental candidates of USA in 2016 and their mentions in hip-hop lyrics. This represents the way pop culture deals with politics. What's funny about this dataset, is the mentions Donald Trump god. FiveThirtyEight specified each mention as negative, neutral or positive. Trump has the most mentions, and even most of them are positive. Clinton has the most negative mentions. Most times Trump is mentioned positive, the subject is money, hotels or luxury lifestyle. Then, there is a shift. From 2015 on, the lyrics that mention Trump are about him personally or politically. Most of them are now negative. This is where I mark out the data I want to use. A pie chart will show the sentiments of the mentions Trump got, the bar chart will show how many times he was mentioned in general and in what sentiments.
+The dataset shows all presidental candidates of USA in 2016 and their mentions in hip-hop lyrics. This represents the way pop culture deals with politics. What's funny about this dataset, is the mentions Donald Trump god. FiveThirtyEight specified each mention as negative, neutral or positive. Trump has the most mentions, and even most of them are positive. Clinton has the most negative mentions. Most times Trump is mentioned positive, the subject is money, hotels or luxury lifestyle. Then, there is a shift. From 2015 on, the lyrics that mention Trump are about him personally or politically. Most of them are now negative. This is where I mark out the data I want to use. A pie chart will show the sentiments of the mentions Trump got, the bar chart will show how many times he was mentioned in general and in what sentiments.![fivethirtyeight](datasource.png)
+This shows the visualisation that FiveThirtyEight made with this dataset. The artist, song title, year, candidate, album release year and even the specific line are shown in this visualisation.
 
 #### Usage in this assessment
 
