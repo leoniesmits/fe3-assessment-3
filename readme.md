@@ -1,5 +1,5 @@
 # Assessment 3
-[the link](https://leoniesmits.github.io/fe3-assessment-3/)
+
 As the final assesment of Front-End 3, this is the visualisation of data I made.
 This readme will tell you about the steps I've taken to the final result, the dataset and all the struggles I've had.
 
@@ -131,7 +131,6 @@ The data can be downloaded at: [FiveThirtyEight's github](https://github.com/fiv
 * [`d3.map`](https://github.com/d3/d3-collection/blob/master/README.md#map) - mapping values in new array
 * [`d3.interpolate`](https://github.com/d3/d3-interpolate) - making a path between angles
 * [`d3.sum`](https://github.com/d3/d3-array#statistics) - returns the sum of the given array of numbers, the value
-* [`d3.format`](https://github.com/d3/d3-format) - use a different format, such as %
 * [`d3.format`](https://github.com/d3/d3-format) - use a different format, such as %
 
 

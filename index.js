@@ -37,14 +37,14 @@ function makeCharts(id, myData){
 // usually, .math is used to calculate the radius
 // since I use 250 for width and height and these are static
 // I just devided them by 2
-        var path = d3.svg.arc()
+        var path = d3.arc()
             .outerRadius(125)
             .innerRadius(0);
 
 // use .layout.pie to transform the data into this specific format
 // all new data constructed by hovering the bar chart, will go through this part
 // a list of the number of sentiments per year are given to the pie
-        var pie = d3.layout.pie()
+        var pie = d3.pie()
             .sort(null).value(function(d) { 
                 return d.sentiment; 
             });
@@ -152,11 +152,15 @@ function makeCharts(id, myData){
 
 // for a 3rd td, give the text the number 
         tr.append("td").attr("class",'legendsentiment')
-            .text(function(d){ return d3.format(",")(d.sentiment);});
+            .text(function(d) { 
+                return d3.format("1")(d.sentiment);
+            });
 
 // create the 4th td and refer to a function called getLegend
         tr.append("td").attr("class",'legendPerc')
-            .text(function(d){ return getLegend(d,lD);});
+            .text(function(d) { 
+                return getLegend(d,lD);
+            });
 
 // for all the tbody elements, redirect to the variable that has the right year and sentiment stored
         leg.update = function(yearSentiment){
@@ -177,7 +181,7 @@ function makeCharts(id, myData){
 // make a new map (array) with .map and return 
 // use parameter v and return v.sentiment to give the value of selected sentiment to legend
         function getLegend(d,dValue){ 
-            return d3.format("%")(d.sentiment/d3.sum(dValue.map(function(v) { 
+            return d3.format(".0%")(d.sentiment/d3.sum(dValue.map(function(v) { 
                 return v.sentiment; 
             })));
         }
@@ -202,12 +206,15 @@ function makeCharts(id, myData){
         var bCsvg = d3.select(id).append("svg")
             .attr("class", "barChart")
             .attr("width", bcSizes.w + bcSizes.l + bcSizes.r)
-            .attr("height", bcSizes.h + bcSizes.t + bcSizes.b).append("g")
+            .attr("height", bcSizes.h + bcSizes.t + bcSizes.b)
+            .append("g")
             .attr("transform", "translate(" + bcSizes.l + "," + bcSizes.t + ")");
 
 // for the x variable, use map to 
-        var x = d3.scale.ordinal()
-        .rangeRoundBands([0, bcSizes.w], 0.1)
+        var x = d3.scaleBand()
+        // .rangeRoundBands([0, bcSizes.w], 0.1)
+        .range([0, bcSizes.w])
+        .round(0.1)
         .domain(bcData.map(function(d) { 
             return d[0]; 
         }));
@@ -215,10 +222,10 @@ function makeCharts(id, myData){
         // Add x-axis to the barChart svg.
         bCsvg.append("g").attr("class", "x axis")
             .attr("transform", "translate(0," + bcSizes.h + ")")
-            .call(d3.svg.axis().scale(x).orient("bottom"));
+            .call(d3.axisBottom(x));
 
         // Create function for y-axis map.
-        var y = d3.scale.linear().range([bcSizes.h, 0])
+        var y = d3.scaleLinear().rangeRound([bcSizes.h, 0])
                 .domain([0, d3.max(bcData, function(d) { return d[1]; })]);
 
         // Create bars for barChart to contain rectangles and sentiment labels.
@@ -227,6 +234,7 @@ function makeCharts(id, myData){
             .enter()
             .append("g")
             .attr("class", "bar");
+
         
 // create the bars
 // for x, use return x variable with (d[0]) to determine the location on x axis
@@ -240,7 +248,7 @@ function makeCharts(id, myData){
             .attr("y", function(d) { 
                 return y(d[1]); 
             })
-            .attr("width", x.rangeBand())
+            .attr("width", 40)
             .attr("height", function(d) { 
                 return bcSizes.h - y(d[1]); 
             })
