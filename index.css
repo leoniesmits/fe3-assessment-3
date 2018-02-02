@@ -78,14 +78,7 @@ section p {
     width: 50px;
 }
 
-/*#field {
-    margin: 50px;
-    display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    flex-flow: row wrap;
-    align-items: stretch;
-}*/
+
 
 svg.histogram {
   width: 100%;
