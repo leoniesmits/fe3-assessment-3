@@ -1,16 +1,20 @@
 # Assessment 3
 
+[link to the project](https://leoniesmits.github.io/fe3-assessment-3/)
+![preview of the page](preview.png)
 As the final assesment of Front-End 3, this is the visualisation of data I made.
 This readme will tell you about the steps I've taken to the final result, the dataset and all the struggles I've had.
 
-###### 1. 
+#### The steps taken in the process
+
+###### 1. Figuring out the idea
 My first step, after figuring out the graphs and interaction I wanted to make, I started to search for similar graphs. The ones that I used mostly were [Martin Chorley's Bar chart](https://bl.ocks.org/martinjc/8a2a545d5c48ef1ff65b747554332e3d), [Mike Bostock's Arctween](http://bl.ocks.org/mbostock/5100636) and [this interactive bar chart](http://bl.ocks.org/jonahwilliams/2f16643b999ada7b1909)
 
-###### 2. 
-To use my own data (from [FiveThirtyEight](https://github.com/fivethirtyeight/data/blob/master/hip-hop-candidate-lyrics/genius_hip_hop_lyrics.csv)) it was a huge struggle. I started with a Pie chart, and my plan was to add up the sentiments used in the data per year. After searching and asking around, I found [this link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce). Instead of already altering and cleaning the data, I used dummy data to play with the pie chart first. I wanted to know if my plan would work, so that was the first priority.
+###### 2. Finding the dataset
+To use my own data (from [FiveThirtyEight](https://github.com/fivethirtyeight/data/blob/master/hip-hop-candidate-lyrics/genius_hip_hop_lyrics.csv)) it was a huge struggle. I started with a Pie chart, and my plan was to add up the sentiments used in the data per year. After searching and asking around, I found [this link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce). Instead of already altering and cleaning the data, I used dummy data to play with the pie chart first. I wanted to know if my plan would work, so that was the first priority. In this step, the main goal was to find some cool data, and I did
 
 
-###### 3.
+###### 3. Starting the pie chart
 I started with a function to make the pie chart, according to [this github article](https://github.com/valor-software/ng2-charts/issues/619) as I was concerned about the colors. The function to make the pie chart is really long and starts with the measurements of the svg, the path and the layout of the pie (the slices). After the svg is specified, the path is specified. The first thing specified, is the color of the sentiments. The sentiments are the negative, neutral or positive labels the lyrics got. I call these three things sentiments. After the function to make the charts, the first thing specified is this: 
 ```javascript
     function sentimentColor(c){ 
@@ -29,7 +33,7 @@ A pie chart is round, so it needs .arc and .innerradius and .outerradius. The fo
 ```
 The layout is specified and the .sort is used to have the biggest amout on the left side. By using .value and returning d.sentiment, the sentiments are totaled and can be put in the pie chart. For the later plan of altering the pie chart by hovering the bar charts and filtering the data by year, this step is very important. As the data is filtered, it goes through this piece of code and is transformed into this format. 
 
-###### 4.
+###### 4. Making the pie chart dynamic
 
 In the pieChart function, there are 4 functions. The first, is to update the chart. This is after the pieChart is made, so the default chart shows the total of the data. A parameter is given, called yearSentiment. This refers to a variable which is later specified and connects to the mouseover function in the bar chart, connecting the to charts.
 ```javascript
@@ -52,9 +56,9 @@ This alters the "d" attribute (the path), making the slices move. The .attrTween
                 };
             }) 
 ```
-The d3.interpolate is from [this example](http://bl.ocks.org/mbostock/5100636). This is used to draw lines between two angles and keeping true to the pie chart shape. The data can be extracted form the total data, or the selected data from the bar chart. The index is extracted as an array and given back in the path between the angles.
+The d3.interpolate is from [this example](http://bl.ocks.org/mbostock/5100636). This is used to draw lines between two angles and keeping true to the pie chart shape. The data can be extracted form the total data, or the selected data from the bar chart. The index is extracted as an object and given back in the path between the angles.
 
-The next functions in the pieChart, are mouseover en mouseout. Both have parameter d, to refer to the data. By hovering the pie chat slice, this has to refer to the right year. Within this function, another function is called to .map the data and return the right color of the selected sentiment. The parameter v gives back an array of the selected sentiment for their year. 
+The next functions in the pieChart, are mouseover en mouseout. Both have parameter d, to refer to the data. By hovering the pie chat slice, this has to refer to the right year. Within this function, another function is called to .map the data and return the right color of the selected sentiment. The parameter v gives back an object of the selected sentiment for their year. 
 
 ```javascript
         function mouseover(d){
@@ -75,7 +79,7 @@ After this, return the pieChart and visualize everything specified before.
         return pC;
     }
 ```
-Finally, map the snetiments from the code as an array and write a function to put the sentiments as type. By using d3.sum to specify you need the value extracted from the sentiments. This is for example negative:1 neutral:4. First return this value and then return the type of sentiment in the data.
+Finally, map the sentiments from the code as an object and write a function to put the sentiments as type. By using d3.sum to specify you need the value extracted from the sentiments. This is for example negative:1 neutral:4. First return this value and then return the type of sentiment in the data.
 ```javascript
     var updatePC = ['negative','neutral','positive']
         .map(function(d) { 
@@ -84,13 +88,14 @@ Finally, map the snetiments from the code as an array and write a function to pu
             }))};
         });  
 ```
-###### 5
+###### 5 Making the legend
 
+The legend is the second part of this project, as it's important to understand the pie chart. This function starts with an empty object aswell, called "leg". The legend consists of a table, inside a tbody, 3 td elements and they each have 3 tr's. 
 
 
 ###### 6
 
-The parameter that the function in pC.update refers to, leads to a variable specified in the barchart mouseover function. By using .keys and .map 
+The parameter that the function in pC.update refers to, leads to a variable specified in the barchart mouseover function. By using .keys and .map to construct the object. 
 ```javascript
 // another mouseover function, this time on the bar chart 
 // store the selected year in a variable with a function
