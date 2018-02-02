@@ -151,7 +151,7 @@ The data can be downloaded at: [FiveThirtyEight's github](https://github.com/fiv
 
 ## Licence 
 
-All the rights go to [Mike Bostock](https://b.locks.org/mbostock) for the [grouped chart](https://bl.ocks.org/mbostock/3887051) 
+All the rights go to [Mike Bostock](https://b.locks.org/mbostock) for the [arctween pie chart](http://bl.ocks.org/mbostock/5100636), the [examples and documentation](https://github.com/d3/d3-collection) and  
 All rights for features used in the library go to[D3](https://d3js.org/). 
 All rights for the usage of multiple datasets go to [Martin Chorley](https://bl.ocks.org/martinjc) [for this chart].(https://bl.ocks.org/martinjc/8a2a545d5c48ef1ff65b747554332e3d)
 And also al rights to [@wooorm](https://github.com/wooorm) and [@Razpudding](https://github.com/Razpudding) for the example codes and the lessons on usage.
