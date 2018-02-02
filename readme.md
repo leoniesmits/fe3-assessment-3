@@ -127,18 +127,12 @@ This function shows how the percentages of the sentiments are calculated. These 
 ```
 
 
-###### 6
+###### 6 Making the bar chart
 
-The parameter that the function in pC.update refers to, leads to a variable specified in the barchart mouseover function. By using .keys and .map to construct the object. 
+
+
+The parameter that the function in pC.update refers to, leads to a variable specified in the barchart mouseover function. By using .keys and .map to construct the object, the returned data shows the year and sentinents that are selected. First, the year is filtered out of the year with a comparison, only the selected year will give true (as there are 11 years). The mouseover has to be true, so only this data will be passed on to the other elements. This comparison is returned as selected year and d[0] as the years. After this function, the [0] is added again, to refer to the correct sentiment in the data. Together, this makes up the correct data if this means by default or selected. In another variable, store the selected year (selectedYear) and sentiment in a new object with .key and .map to construct this.
 ```javascript
-// another mouseover function, this time on the bar chart 
-// store the selected year in a variable with a function
-// first, filter the year out of the data with a comparison
-// the mouseover year has to be true, all the others are false
-// return the comparison between s.year (selected year) and d[0] (the years)  
-// after this function, add the [0] to refer to the sentiment in the data
-// then in another variable, store the selected year variable and sentiment in a new
-// array with .key and use .map to make an object with the selected year and sentiment
         function mouseover(d){ 
             var selectedYear = myData.filter(function(s){ 
                 return s.year == d[0]
