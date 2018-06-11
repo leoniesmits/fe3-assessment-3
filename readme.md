@@ -1,6 +1,6 @@
 # Assessment 3
 
-[link to the project](https://leoniesmits.github.io/fe3-assessment-3/)
+[link to the project](https://leoniesmits.github.io/trump-lyrics/)
 ![preview of the page](preview.png)
 As the final assesment of Front-End 3, this is the visualisation of data I made.
 This readme will tell you about the steps I've taken to the final result, the dataset and all the struggles I've had.
