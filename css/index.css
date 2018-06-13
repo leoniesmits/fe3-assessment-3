@@ -1,0 +1,144 @@
+body{
+    width: 500px;
+    margin: 0 auto;
+}
+
+path {
+  stroke: #fff;
+}
+
+path:hover {  
+  opacity: 0.8;
+}
+
+rect:hover {
+  opacity: 0.5; 
+}
+
+section,
+table,
+svg,
+text {
+  font-family: "Inconsolata",Monaco,"Lucida Console",Consolas,"Courier New";
+  font-style: normal;
+  text-align: center;
+}
+
+section h1 {
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+section p {
+  font-family: "Open Sans";
+  text-align: left;
+  font-size: 12px;
+  font-weight: 50;
+  margin-top: 5px;
+}
+
+.axis {
+  font: 10px sans-serif; 
+}
+
+.legend tr {
+    border: 1px solid black; 
+    border-right: white;
+    border-left: white;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none; 
+}
+
+.legend {
+    margin: 30px 0px 90px;
+    width: 200px;
+    display: inline-block;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.legend td {
+    padding: 4px 5px;
+    vertical-align: bottom;
+}
+
+.legendsentiment, .legendPerc{
+    width: 50px;
+}
+
+svg.histogram {
+  width: 100%;
+}
+
+svg.piechart {
+  margin-right: 30px;
+}
+
+@media (min-width: 45em) {
+  body {
+    width: 80%;
+  }
+
+  section {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-gap: 10px;
+  }
+
+  article {
+    width: 90%;
+  }
+
+  section h1 {
+    margin-bottom: 30px;
+  }
+
+  #field {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+    grid-template-areas: 
+      "barchart barchart"
+      "piechart legend";
+  }
+
+  svg.barChart {
+    grid-area: barchart;
+    margin: 0 auto;
+  }
+
+  svg.piechart {
+    grid-area: piechart;
+    margin: 0 auto;
+  }
+
+  .legend {
+    grid-area: legend;
+    margin: 0 auto;
+    margin-top: 30%;
+  }
+
+}
+
+@media (min-width: 65em) {
+  body {
+    width: 60%;
+  }
+
+  article {
+    width: 70%;
+  }
+}
