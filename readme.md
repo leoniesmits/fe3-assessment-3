@@ -1,4 +1,5 @@
 # Assessment 3
+[link to the page](https://leoniesmits.github.io/fe3-assessment-3/)
 
 [link to the project](https://leoniesmits.github.io/trump-lyrics/)
 ![preview of the page](preview.png)
